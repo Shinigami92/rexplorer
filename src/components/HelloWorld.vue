@@ -6,6 +6,10 @@ defineProps<{ msg: string }>();
 
 const count = ref(0);
 
+async function backendPaths(): Promise<void> {
+  await invoke('backend_paths');
+}
+
 async function backendAdd(): Promise<void> {
   count.value = await invoke('backend_add', { num: count.value });
 }
@@ -22,4 +26,6 @@ async function backendAdd(): Promise<void> {
       button.btn(type="button", @click="count++") Add 1
 
       button.btn(type="button", @click="backendAdd") Add 2 in backend
+
+      button.btn(type="button", @click="backendPaths") Log paths
 </template>
