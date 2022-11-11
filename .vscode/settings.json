@@ -1,0 +1,4 @@
+{
+  "cSpell.words": ["rexplorer", "tauri"],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
