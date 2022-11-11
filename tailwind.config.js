@@ -1,11 +1,11 @@
-const resolve = require("path").resolve;
+const resolve = require('path').resolve;
 // const plugin = require('tailwindcss/plugin')
 // const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
-    resolve(__dirname, "index.html"),
-    resolve(__dirname, "src/**/*.{vue,ts}"),
+    resolve(__dirname, 'index.html'),
+    resolve(__dirname, 'src/**/*.{vue,ts}'),
   ],
   // theme: {
   //   extend: {

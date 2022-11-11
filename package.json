@@ -1,34 +1,85 @@
 {
   "name": "rexplorer",
   "version": "0.1.0",
+  "description": "A File-Explorer written in Tauri",
   "private": true,
   "scripts": {
-    "dev": "RUST_BACKTRACE=1 concurrently -k \"tauri dev\" \"pnpm devtools\"",
+    "clean": "rimraf dist pnpm-lock.yaml node_modules",
+    "check": "cd src-tauri && cargo check",
+    "ts-check": "vue-tsc --noEmit",
     "build": "tauri build",
+    "preview": "vite preview",
+    "start": "RUST_BACKTRACE=1 concurrently -k \"tauri dev\" \"pnpm devtools\"",
+    "start:dev": "RUST_BACKTRACE=1 concurrently -k \"tauri dev\" \"pnpm devtools\"",
     "vite:dev": "vite dev",
     "vite:build": "vite build",
     "devtools": "pnpm vue-devtools",
-    "ts-check": "vue-tsc --noEmit",
-    "preview": "vite preview",
-    "check": "cd src-tauri && cargo check"
+    "format": "prettier --write .",
+    "lint": "eslint --ext .ts,.vue src"
   },
+  "author": {
+    "name": "Christopher Quadflieg",
+    "email": "chrissi92@hotmail.de",
+    "url": "https://github.com/Shinigami92"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shinigami92/rexplorer.git"
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/Shinigami92"
+    },
+    {
+      "type": "paypal",
+      "url": "https://www.paypal.com/donate/?hosted_button_id=L7GY729FBKTZY"
+    }
+  ],
+  "bugs": "https://github.com/Shinigami92/rexplorer/issues",
   "dependencies": {
     "@tauri-apps/api": "~1.2.0",
+    "@vueuse/core": "~9.5.0",
     "vue": "~3.2.45"
   },
   "devDependencies": {
+    "@prettier/plugin-pug": "~2.3.0",
     "@tauri-apps/cli": "~1.2.0",
     "@types/node": "~18.11.9",
+    "@types/web-bluetooth": "~0.0.16",
+    "@typescript-eslint/eslint-plugin": "~5.42.1",
+    "@typescript-eslint/parser": "~5.42.1",
     "@vitejs/plugin-vue": "~3.2.0",
+    "@volar/vue-language-plugin-pug": "~1.0.9",
     "@vue/devtools": "~6.4.5",
     "autoprefixer": "~10.4.13",
     "concurrently": "~7.5.0",
+    "eslint": "~8.27.0",
+    "eslint-config-prettier": "~8.5.0",
+    "eslint-define-config": "~1.12.0",
+    "eslint-gitignore": "~0.1.0",
+    "eslint-import-resolver-typescript": "~3.5.2",
+    "eslint-plugin-import": "~2.26.0",
+    "eslint-plugin-prettier": "~4.2.1",
+    "eslint-plugin-vue": "~9.7.0",
+    "eslint-plugin-vue-pug": "~0.5.4",
     "postcss": "~8.4.19",
     "postcss-import": "~15.0.0",
     "postcss-nesting": "~10.2.0",
+    "prettier": "2.7.1",
+    "prettier-plugin-organize-imports": "~3.2.0",
+    "pug": "~3.0.2",
+    "rimraf": "~3.0.2",
     "tailwindcss": "~3.2.4",
     "typescript": "~4.8.4",
     "vite": "~3.2.3",
+    "vue-eslint-parser": "~9.1.0",
     "vue-tsc": "~1.0.9"
+  },
+  "packageManager": "pnpm@7.15.0",
+  "engines": {
+    "node": ">= 18.0.0",
+    "npm": ">= 7.0.0",
+    "pnpm": ">= 7.0.0"
   }
 }
