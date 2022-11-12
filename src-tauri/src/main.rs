@@ -7,26 +7,40 @@ use std::fs;
 use tauri::api::shell;
 use tauri::{CustomMenuItem, Manager, Menu, Submenu};
 
-#[tauri::command]
-fn backend_paths() {
-    let paths = fs::read_dir("/").unwrap();
-    for path in paths {
-        println!("Name: {}", path.unwrap().path().display())
-    }
+#[derive(serde::Serialize)]
+struct FileResponse {
+    path: String,
+    name: String,
+    size: u64,
+    is_dir: bool,
 }
 
 #[tauri::command]
-fn backend_add(num: i32) -> i32 {
-    // Note: these commands block the main thread and hang the UI until they return.
-    // If you need to run a long-running task, use async command instead.
-    println!("Backend was called with an argument: {}", num);
-    num + 2
+fn get_paths() -> Vec<FileResponse> {
+    let home = std::env::var("HOME").unwrap();
+    println!("home: {}", home);
+    let paths = fs::read_dir(home).unwrap();
+    let mut paths_vec = Vec::new();
+    for path in paths {
+        let p = path.unwrap().path();
+        println!("{:?}", p);
+        if p.is_symlink() {
+            println!("{} is symlink", p.display());
+            continue;
+        }
+        paths_vec.push(FileResponse {
+            path: p.to_str().unwrap().to_string(),
+            name: p.file_name().unwrap().to_str().unwrap().to_string(),
+            size: p.metadata().unwrap().len(),
+            is_dir: p.is_dir(),
+        });
+    }
+    paths_vec
 }
 
 fn main() {
-    let ctx = tauri::generate_context!();
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![backend_paths, backend_add])
+        .invoke_handler(tauri::generate_handler![get_paths])
         .menu(
             tauri::Menu::os_default("Rexplorer").add_submenu(Submenu::new(
                 "Help",
@@ -51,6 +65,6 @@ fn main() {
             }
             Ok(())
         })
-        .run(ctx)
+        .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
