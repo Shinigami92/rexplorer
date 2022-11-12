@@ -12,7 +12,11 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "vueCompilerOptions": {
     "plugins": ["@volar/vue-language-plugin-pug"]

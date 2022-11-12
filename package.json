@@ -38,6 +38,7 @@
   ],
   "bugs": "https://github.com/Shinigami92/rexplorer/issues",
   "dependencies": {
+    "@mdi/font": "~7.0.96",
     "@tauri-apps/api": "~1.2.0",
     "@vueuse/core": "~9.5.0",
     "vue": "~3.2.45"

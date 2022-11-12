@@ -8,6 +8,7 @@ export interface FileResponse {
 </script>
 
 <script setup lang="ts">
+import RFileSize from '@/components/RFileSize.vue';
 import { invoke } from '@tauri-apps/api/tauri';
 import { onMounted, ref } from 'vue';
 
@@ -17,7 +18,7 @@ const paths = ref<FileResponse[]>([]);
 
 async function backendPaths(): Promise<void> {
   const result = await invoke<FileResponse[]>('get_paths');
-  // Sort by is_dir, then name
+
   paths.value = result.sort((a, b) => {
     if (a.is_dir === b.is_dir) {
       return a.name.localeCompare(b.name);
@@ -39,9 +40,10 @@ onMounted(backendPaths);
         tr
           th Name
           th Size
-          th Is Directory
         tr(v-for="path in paths", :key="path.path")
-          td {{ path.name }}
-          td.text-right {{ path.is_dir ? '' : path.size }}
-          td {{ path.is_dir }}
+          td
+            i.mdi(:class="[path.is_dir ? 'mdi-folder' : 'mdi-file']")
+            span.ml-2 {{ path.name }}
+          td.text-right
+            RFileSize(v-if="!path.is_dir", :file-size="path.size")
 </template>

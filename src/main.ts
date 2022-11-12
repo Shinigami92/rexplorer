@@ -4,6 +4,8 @@ import App from './App.vue';
 
 import './assets/main.postcss';
 
+import '@mdi/font/css/materialdesignicons.css';
+
 if (process.env.NODE_ENV === 'development') {
   devtools.connect('http://localhost', 8098);
 }
