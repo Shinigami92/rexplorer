@@ -13,6 +13,8 @@ module.exports = {
   singleQuote: true,
   trailingComma: 'all',
 
+  organizeImportsSkipDestructiveCodeActions: true,
+
   pugSingleQuote: false,
   pugSortAttributes: 'asc',
   pugSortAttributesBeginning: [
